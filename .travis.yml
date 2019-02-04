@@ -5,23 +5,23 @@ cache:
   directories:
   - node_modules
   
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
-script:
-  - yarn install
-  # - yarn run build
+# before_install:
+#   - curl -o- -L https://yarnpkg.com/install.sh | bash
+#   - export PATH=$HOME/.yarn/bin:$PATH
+# script:
+#   - yarn install
+#   - yarn run build
 
 addons:
   artifacts: true
-    # debug: true
+    debug: true
     #   paths:
     #     - $(git ls-files | tr "\n" ":")
-#     paths:
-#     - $(git ls-files | tr "\n" ":")
-# #    - $(git ls-files -o | tr "\n" ":")
-#     - $(ls /var/log/*.log | tr "\n" ":")
-#     - $HOME/some/other/thing.log
+    paths:
+    # - $(git ls-files | tr "\n" ":")
+    - $(git ls-files -o | tr "\n" ":")
+    - $(ls /var/log/*.log | tr "\n" ":")
+    - $HOME/some/other/thing.log
 deploy:
   provider: s3
   access_key_id: $ARTIFACTS_KEY
