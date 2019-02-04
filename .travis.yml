@@ -13,15 +13,21 @@ script:
   # - yarn run build
 
 addons:
-  artifacts:
-    debug: true
-      paths:
-        - $(git ls-files | tr "\n" ":")
+  artifacts: true
+    # debug: true
+    #   paths:
+    #     - $(git ls-files | tr "\n" ":")
 #     paths:
 #     - $(git ls-files | tr "\n" ":")
 # #    - $(git ls-files -o | tr "\n" ":")
 #     - $(ls /var/log/*.log | tr "\n" ":")
 #     - $HOME/some/other/thing.log
+deploy:
+  provider: s3
+  access_key_id: $ARTIFACTS_KEY
+  secret_access_key: $ARTIFACTS_SECRET
+  bucket: $ARTIFACTS_BUCKET
+  
 env:
   global:
     - ORG=PoliticcInc
