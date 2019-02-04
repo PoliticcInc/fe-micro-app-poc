@@ -4,17 +4,26 @@ node_js:
 cache:
   directories:
   - node_modules
+  
 before_install:
-  - npm install -g yarn
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
 script:
   - yarn install
-  - yarn run build
-addons:
-  artifacts: true
+  # - yarn run build
 
+addons:
+  artifacts:
+    # ...
+    working_dir: src
+    debug: true
+      paths:
+        - $(git ls-files | tr "\n" ":")
+#     paths:
+#     - $(git ls-files | tr "\n" ":")
+# #    - $(git ls-files -o | tr "\n" ":")
+#     - $(ls /var/log/*.log | tr "\n" ":")
+#     - $HOME/some/other/thing.log
 env:
   global:
     - ORG=PoliticcInc
-branches:
-  only:
-  - master
